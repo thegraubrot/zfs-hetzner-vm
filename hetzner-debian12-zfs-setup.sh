@@ -554,6 +554,11 @@ echo "======= create zfs pools and datasets =========="
 # shellcheck disable=SC2086
 zpool create \
   $v_bpool_tweaks -O canmount=off -O devices=off \
+  -o compatibility=grub2 \
+  -o autotrim=on \
+  -O normalization=formD \
+  -O relatime=on \
+  -O acltype=posixacl -O xattr=sa \
   -o cachefile=/etc/zpool.cache \
   -O mountpoint=/boot -R $c_zfs_mount_dir -f \
   $v_bpool_name $pools_mirror_option "${bpool_disks_partitions[@]}"
